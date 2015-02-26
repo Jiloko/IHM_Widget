@@ -3,9 +3,21 @@
 #include <wx/wx.h>
 #include <wx/accel.h>
 
+#include "dialogs.h"
 #include "mainframe.h"
 
 BEGIN_EVENT_TABLE(CMainFrame, wxFrame)
+	EVT_MENU(MENU_NEW,     CMainFrame::OnNew)
+	EVT_MENU(MENU_OPEN,    CMainFrame::OnSave)
+	EVT_MENU(MENU_SAVE,    CMainFrame::OnSave)
+	EVT_MENU(MENU_EXIT,    CMainFrame::OnExit)
+	EVT_MENU(MENU_SIZE,    CMainFrame::OnSize)
+	EVT_MENU(MENU_COLOR,   CMainFrame::OnColor)
+	EVT_MENU(MENU_MANAGE,  CMainFrame::OnManage)
+	EVT_MENU(MENU_VERSION, CMainFrame::OnVersion)
+	EVT_MENU(MENU_TOOLBAR, CMainFrame::OnToolbar)
+	EVT_MENU(MENU_DRAW,    CMainFrame::OnDraw)
+	EVT_MENU(TOOLBAR_TOOLS,   CMainFrame::OnTools)
 END_EVENT_TABLE()
 
 
@@ -57,7 +69,8 @@ void CMainFrame::CreateMyToolbar()
 
     void CMainFrame::OnSize(wxCommandEvent& event)
     {
-
+		ThicknessDialog thicknessdialog(this, -1, wxT("Epaisseur"));
+		thicknessdialog.ShowModal();
     }
 
     void CMainFrame::OnColor(wxCommandEvent& event)
@@ -67,12 +80,14 @@ void CMainFrame::CreateMyToolbar()
 
     void CMainFrame::OnManage(wxCommandEvent& event)
     {
-
+		TriangleDialog triangledialog(this, -1, wxT("Gestion des triangles"));
+		triangledialog.ShowModal();
     }
 
     void CMainFrame::OnVersion(wxCommandEvent& event)
     {
-
+		VersionDialog versiondialog(this, -1, wxT("Version"));
+		versiondialog.ShowModal();
     }
 
     void CMainFrame::OnToolbar(wxCommandEvent& event)
@@ -87,5 +102,5 @@ void CMainFrame::CreateMyToolbar()
 
     void CMainFrame::OnTools(wxCommandEvent& event)
     {
-
+		
     }

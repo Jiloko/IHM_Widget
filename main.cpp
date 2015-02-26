@@ -44,9 +44,9 @@ bool MyApp::OnInit()
 
     display_menu->AppendCheckItem(MENU_TOOLBAR, wxT("Barre d'outils\tCtrl-B")),
 
-    options_menu->Append(MENU_SIZE, wxT("Epaisseur\tCtrl-E"));
-    options_menu->Append(MENU_COLOR, wxT("Epaisseur\tCtrl-R"));
-    options_menu->Append(MENU_MANAGE, wxT("Epaisseur\tCtrl-G"));
+    options_menu->Append(MENU_SIZE, wxT("Taille\tCtrl-E"));
+    options_menu->Append(MENU_COLOR, wxT("Couleur\tCtrl-R"));
+    options_menu->Append(MENU_MANAGE, wxT("Gestion\tCtrl-G"));
 
     help_menu->Append(MENU_VERSION, wxT("Version"));
 
@@ -56,14 +56,6 @@ bool MyApp::OnInit()
 
     m_MainFrame->SetMenuBar(menu_bar);
 
-    //VersionDialog testdialog(m_MainFrame, -1, wxT("Version"));
-    //testdialog.ShowModal();
-    
-    //ThicknessDialog testdialog(m_MainFrame, -1, wxT("Epaisseur"));
-    //testdialog.ShowModal();
-
-    //TriangleDialog testdialog(m_MainFrame, -1, wxT("Gestion des triangles"));
-    //testdialog.ShowModal();
 
     //PropertiesDialog testdialog(m_MainFrame, -1, wxT("Propriétés"));
     //testdialog.ShowModal();
