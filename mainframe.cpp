@@ -25,6 +25,7 @@ END_EVENT_TABLE()
 CMainFrame::CMainFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
 : wxFrame((wxFrame *)NULL, -1, title, pos, size) 
 {
+    nbtriangle = 0;
 } //constructor
 
 void CMainFrame::CreateMyToolbar()
@@ -47,60 +48,70 @@ void CMainFrame::CreateMyToolbar()
     SetToolBar(m_toolbar);
 }
 
-    void CMainFrame::OnNew(wxCommandEvent& event)
-    {
+void CMainFrame::OnNew(wxCommandEvent& event)
+{
 
-    }
+}
 
-    void CMainFrame::OnOpen(wxCommandEvent& event)
-    {
+void CMainFrame::OnOpen(wxCommandEvent& event)
+{
 
-    }
+}
 
-    void CMainFrame::OnSave(wxCommandEvent& event)
-    {
+void CMainFrame::OnSave(wxCommandEvent& event)
+{
 
-    }
+}
 
-    void CMainFrame::OnExit(wxCommandEvent& event)
-    {
-        Close(TRUE);
-    }
+void CMainFrame::OnExit(wxCommandEvent& event)
+{
+    Close(TRUE);
+}
 
-    void CMainFrame::OnSize(wxCommandEvent& event)
-    {
-		ThicknessDialog thicknessdialog(this, -1, wxT("Epaisseur"));
-		thicknessdialog.ShowModal();
-    }
+void CMainFrame::OnSize(wxCommandEvent& event)
+{
+	ThicknessDialog thicknessdialog(this, -1, wxT("Epaisseur"));
+	thicknessdialog.ShowModal();
+}
 
-    void CMainFrame::OnColor(wxCommandEvent& event)
-    {
+void CMainFrame::OnColor(wxCommandEvent& event)
+{
+    ColorDialog colordialog(this, -1, wxT("Couleur"));
+    colordialog.ShowModal();
+}
 
-    }
+void CMainFrame::OnManage(wxCommandEvent& event)
+{
+	TriangleDialog triangledialog(this, -1, wxT("Gestion des triangles"));
 
-    void CMainFrame::OnManage(wxCommandEvent& event)
-    {
-		TriangleDialog triangledialog(this, -1, wxT("Gestion des triangles"));
-		triangledialog.ShowModal();
-    }
+    wxListBox * list = triangledialog.getList();
+    list->Clear();
+    list->Append(wxT("tri4"));
+    list->Append(wxT("tri5")); 
+    list->SetSelection(1);
+	triangledialog.ShowModal();
+}
 
-    void CMainFrame::OnVersion(wxCommandEvent& event)
-    {
-		VersionDialog versiondialog(this, -1, wxT("Version"));
-		versiondialog.ShowModal();
-    }
+void CMainFrame::OnVersion(wxCommandEvent& event)
+{
+	VersionDialog versiondialog(this, -1, wxT("Version"));
+	versiondialog.ShowModal();
+}
 
-    void CMainFrame::OnToolbar(wxCommandEvent& event)
-    {
+void CMainFrame::OnToolbar(wxCommandEvent& event)
+{
+    if(m_toolbar->IsShownOnScreen())
+        m_toolbar->Hide();
+    else
+        m_toolbar->Show();   
+}
 
-    }
+void CMainFrame::OnDraw(wxCommandEvent& event)
+{
+    std::cout << "pouet" << std::endl;
+}
 
-    void CMainFrame::OnDraw(wxCommandEvent& event)
-    {
-
-    }
-
-    void CMainFrame::OnTools(wxCommandEvent& event)
-    {
-		
-    }
+void CMainFrame::OnTools(wxCommandEvent& event)
+{
+	
+}

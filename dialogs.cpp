@@ -6,8 +6,10 @@
 
 #include "dialogs.h"
 
+/*****************Version Dialog************************/
+
 BEGIN_EVENT_TABLE(VersionDialog, wxDialog)
-END_EVENT_TABLE ()
+END_EVENT_TABLE()
 
 VersionDialog::VersionDialog( wxWindow *parent, wxWindowID id,const wxString &title)
     :wxDialog( parent, id, title)
@@ -25,8 +27,12 @@ VersionDialog::VersionDialog( wxWindow *parent, wxWindowID id,const wxString &ti
     box1->SetSizeHints(this);
 
 }
+
+
+/*****************Thickness Dialog************************/
+
 BEGIN_EVENT_TABLE(ThicknessDialog, wxDialog)
-END_EVENT_TABLE ()
+END_EVENT_TABLE()
 
 ThicknessDialog::ThicknessDialog( wxWindow *parent, wxWindowID id,const wxString &title)
     :wxDialog( parent, id, title)
@@ -47,9 +53,44 @@ ThicknessDialog::ThicknessDialog( wxWindow *parent, wxWindowID id,const wxString
 
 }
 
+/*****************ColorDialog Dialog************************/
+
+BEGIN_EVENT_TABLE(ColorDialog, wxDialog)
+END_EVENT_TABLE()
+
+ColorDialog::ColorDialog( wxWindow *parent, wxWindowID id,const wxString &title)
+    :wxDialog( parent, id, title)
+{
+    wxBoxSizer *box1 = new wxBoxSizer( wxVERTICAL );
+    wxStaticText *item1 = new  wxStaticText( this, ID_TEXT2, wxT("Choisir une nouvelle couleur"),
+                                             wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE );
+    wxString choices[] = {wxT("Rouge"),wxT("Bleu"),wxT("Vert")};
+    wxRadioBox *item2 = new wxRadioBox(this, ID_RADIO1, wxT("Couleur"), wxDefaultPosition, wxDefaultSize, 3, choices);
+    wxButton *item3 = new wxButton( this, wxID_OK, wxT("OK"), wxDefaultPosition);
+
+    box1->Add(item1, 0, wxALIGN_CENTRE|wxALL, 5);
+    box1->Add(item2, 0, wxALIGN_CENTRE|wxALL, 5);
+    box1->Add(item3, 0, wxALIGN_CENTRE|wxALL, 5);
+    this->SetAutoLayout(TRUE);
+    this->SetSizer(box1);
+    box1->Fit(this);
+    box1->SetSizeHints(this);
+
+}
+
+
+/*****************TriangleDialog Dialog************************/
 
 BEGIN_EVENT_TABLE(TriangleDialog, wxDialog)
-END_EVENT_TABLE ()
+    EVT_BUTTON(ID_PROP, TriangleDialog::OnProperties)
+END_EVENT_TABLE()
+
+
+void TriangleDialog::OnProperties(wxCommandEvent& event)
+{
+    PropertiesDialog dialog(this, -1, wxT("Propriétés"));
+    dialog.ShowModal();
+}
 
 TriangleDialog::TriangleDialog( wxWindow *parent, wxWindowID id,const wxString &title)
     :wxDialog( parent, id, title)
@@ -64,10 +105,10 @@ TriangleDialog::TriangleDialog( wxWindow *parent, wxWindowID id,const wxString &
 
 
     wxString choices [] = { wxT("tri1"),wxT("tri2"),wxT("tri3")};
-    wxListBox *item2 = new wxListBox( this, ID_LISTBOX1, wxDefaultPosition, wxSize(100, 250), 3 , choices, 0); // 3 : size(choices)
+    listBox = new wxListBox( this, ID_LISTBOX1, wxDefaultPosition, wxSize(100, 250), 3 , choices, 0); // 3 : size(choices)
 
     box1->Add(item1, 0, wxALIGN_CENTRE|wxALL, 5);
-    box1->Add(item2, 0, wxALIGN_CENTRE|wxALL, 5);
+    box1->Add(listBox, 0, wxALIGN_CENTRE|wxALL, 5);
 
     wxButton *item3 = new wxButton( this, ID_PROP, wxT("Propriétés"), wxDefaultPosition);
     wxButton *item4 = new wxButton( this, ID_SUPPR, wxT("Supprimer"), wxDefaultPosition);
@@ -88,8 +129,15 @@ TriangleDialog::TriangleDialog( wxWindow *parent, wxWindowID id,const wxString &
 
 }
 
+wxListBox* TriangleDialog::getList() 
+{
+  return this->listBox;
+}
+
+/*****************Properties Dialog************************/
+
 BEGIN_EVENT_TABLE(PropertiesDialog, wxDialog)
-END_EVENT_TABLE ()
+END_EVENT_TABLE()
 
 PropertiesDialog::PropertiesDialog( wxWindow *parent, wxWindowID id,const wxString &title)
     :wxDialog( parent, id, title)

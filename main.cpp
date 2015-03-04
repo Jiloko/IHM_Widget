@@ -52,13 +52,10 @@ bool MyApp::OnInit()
 
     display_menu->Check(MENU_TOOLBAR,TRUE);
 
-    menu_bar->Enable(MENU_MANAGE,false);
+    //menu_bar->Enable(MENU_MANAGE,false);
 
     m_MainFrame->SetMenuBar(menu_bar);
 
-
-    //PropertiesDialog testdialog(m_MainFrame, -1, wxT("Propriétés"));
-    //testdialog.ShowModal();
     
     
 	return TRUE;
