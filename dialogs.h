@@ -1,77 +1,103 @@
-#ifndef DIALOGS_H
-#define DIALOGS_H
+#ifndef __DIALOGS_H__
+#define __DIALOGS_H__
 
-#include "wx/wx.h"
+#include <wx/spinctrl.h>
+#include "triangle.h"
 #include "mainframe.h"
 
-enum {ID_TEXT1 = 10000, ID_TEXT2 = 10001, ID_SLIDER1 = 10002, ID_PROP = 10003, ID_SUPPR = 10004, ID_TEXT3 = 10005,
-	 ID_LISTBOX1 = 10006, ID_TEXT_CTRL1= 10007, ID_SPIN_CTRL1=10008, ID_RADIO1=10009};
+enum {  
+    VERSION_TEXT=1337,
+    THICKNESS_TEXT,
+    THICKNESS_SLIDER,
+    COLOR_TEXT,
+    COLOR_RADIO,
+    TRIANGLE_LIST,
+    BUTTON_PROP,
+    BUTTON_DELETE,
+    ID_PROP_TEXT,
+    THICKNESS_PROP_TEXT,
+    PROP_CTRL,
+    PROP_SPIN
+};
 
-/*****************Thickness Dialog************************/
+/*---------------------Version Dialog---------------------*/
 
-class VersionDialog: public wxDialog
+class VersionDialog: public wxDialog 
 {
-    public :
+    public:
         VersionDialog(wxWindow *parent, wxWindowID id, const wxString &title);
-
-    private :
-
-    DECLARE_EVENT_TABLE();
+  
+    private:
+        DECLARE_EVENT_TABLE();
 };
 
+/*---------------------Thickness Dialog---------------------*/
 
-/*****************Color Dialog************************/
-
-class ColorDialog: public wxDialog
+class ThicknessDialog: public wxDialog 
 {
-    public :
-        ColorDialog(wxWindow *parent, wxWindowID id, const wxString &title);
+    public:
+        ThicknessDialog(CMainFrame *parent, wxWindowID id, 
+            const wxString &title);
+        wxSlider *thick_slider;
 
-    private :
-
-    DECLARE_EVENT_TABLE();
+    private:
+        DECLARE_EVENT_TABLE();
 };
 
+/*---------------------Color Dialog---------------------*/
 
-/*****************TriangleDialog Dialog************************/
-
-class ThicknessDialog: public wxDialog
+class ColorDialog: public wxDialog 
 {
-    public :
-        ThicknessDialog(wxWindow *parent, wxWindowID id, const wxString &title);
-
-    private :
-
-    DECLARE_EVENT_TABLE();
+    public:
+        ColorDialog(CMainFrame *parent, wxWindowID id, const wxString &title);
+        wxColour* getColor();
+    
+    private:
+        DECLARE_EVENT_TABLE();
+        wxRadioBox *color_radio;
 };
 
+/*---------------------Triangle Dialog---------------------*/
 
-/*****************TriangleDialog Dialog************************/
-
-class TriangleDialog: public wxDialog
+class TriangleDialog: public wxDialog 
 {
-    public :
-        TriangleDialog(wxWindow *parent, wxWindowID id, const wxString &title);
-        wxListBox * getList();
-    private :
-        wxListBox *listBox;
-        void OnProperties(wxCommandEvent& event);
+    public:
+        TriangleDialog(CMainFrame *parent, wxWindowID id, 
+            const wxString &title);
+        wxListBox * getListBox();
 
-    DECLARE_EVENT_TABLE();
+    private:
+        DECLARE_EVENT_TABLE();
+        CMainFrame *p;
+        wxListBox *triangle_list;
+        void OnProp(wxCommandEvent& event);
+        void OnDelete(wxCommandEvent& event);
 };
 
-/*****************Properties Dialog************************/
+/*---------------------Properties Dialog---------------------*/
 
-class PropertiesDialog: public wxDialog
+class PropDialog: public wxDialog 
 {
-    public :
-        PropertiesDialog(wxWindow *parent, wxWindowID id, const wxString &title);
-
-    private :
-
-    DECLARE_EVENT_TABLE();
+    public:
+        wxSpinCtrl *prop_spin;
+        wxRadioBox *prop_radio;
+        wxTextCtrl *prop_name;
+        PropDialog(wxWindow *parent, wxWindowID id, const wxString &title,
+            int id_tri, Triangle triangle);
+  
+    private:
+        DECLARE_EVENT_TABLE();
 };
 
-#endif // DIALOGS_H
+/*---------------------File Dialog---------------------*/
 
+class FileDialog: public wxFileDialog 
+{
+    public:
+        FileDialog(wxWindow* parent, const wxString& message,
+            const wxString& default_Dir, const wxString& default_File,
+            const wxString& wildcard, long style);
+  
+};
 
+#endif
