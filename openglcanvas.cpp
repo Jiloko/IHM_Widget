@@ -160,7 +160,7 @@ void OpenGLCanvas::OnLeftUp(wxMouseEvent& event)
             {
                 wxString name;
                 name << p->nbtriangle+1;
-                p->tab_triangle[p->nbtriangle].name = wxT("Tri " + name);
+                p->tab_triangle[p->nbtriangle].name = wxT("T " + name);
                 p->tab_triangle[p->nbtriangle].p1 = triangle.p1;
                 p->tab_triangle[p->nbtriangle].p2 = triangle.p2;
                 p->tab_triangle[p->nbtriangle].p3 = triangle.p3;

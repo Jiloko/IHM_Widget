@@ -182,11 +182,7 @@ void CMainFrame::OnTriangle(wxCommandEvent& event)
     list->Clear();
 
     for (int i = 0; i < nbtriangle; ++i) 
-    {
-        wxString chi;
-        chi << i+1;
         list->Append(tab_triangle[i].name);
-    }
 
     dialog.ShowModal();
 }
